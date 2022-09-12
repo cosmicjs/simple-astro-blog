@@ -11,19 +11,18 @@ const { title, description, imageUrl } = Astro.props;
     <Metadata title={title} description={description} imageUrl={imageUrl} />
   </head>
   <body class="bg-zinc-100">
-    <Navigation />
-    <div
-      class="flex justify-center -mt-1 rounded-md border-b w-60 mx-auto py-2 px-8 shadow opacity-60 hover:opacity-100 transition-opacity -z-20"
-    >
-      <span class="text-sm"
-        >View the <a
-          href="https://github.com/cosmicjs/simple-astro-blog"
-          target="_blank"
-          rel="noreferrer noopener"
-          class="text-blue-600 border-b">source code</a
-        >
-      </span>
+    <div class="mt-12 p-2 md:mt-0 text-center border-b bg-white text-sm">
+      The source code for this portfolio is{" "}
+      <a
+        href="https://github.com/cosmicjs/nextjs-developer-portfolio"
+        target="_parent"
+        class="underline hover:text-accent transition-colors"
+      >
+        available on GitHub
+      </a>
+      .
     </div>
+    <Navigation />
     <main
       class="flex flex-col max-w-3xl mx-auto my-12 px-3 lg:px-0 min-h-screen"
     >
