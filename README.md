@@ -1,49 +1,65 @@
-# Welcome to [Astro](https://astro.build)
+# Simple Astro Blog built with Astro and Cosmic
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
+To build this app, we’re going to use the following technologies:
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- [Astro](https://astro.build/) - A React framework for production that makes it easy to spin up a full-stack application.
+- [Cosmic](https://www.cosmicjs.com/) - A Headless CMS enables the independence of the data (content) layer and gives us the ability to quickly manage template content.
+- [Tailwind CSS](https://tailwindcss.com/) - A performant utility-first CSS framework that can be composed directly in your markup.
 
-![basics](https://user-images.githubusercontent.com/4677417/186188965-73453154-fdec-4d6b-9c34-cb35c248ae5b.png)
+### Links
 
+- [Install the App Template](https://www.cosmicjs.com/apps/simple-astro-blog)
+- [View the live demo](https://simple-astro-blog.vercel.app/)
 
-## 🚀 Project Structure
+## Screenshots
 
-Inside of your Astro project, you'll see the following folders and files:
+![Home Page](https://imgix.cosmicjs.com/e0b61790-32db-11ed-8a37-f1952c73e588-astro-cms-screenshot-4.png?w=1200&auto=format)
+
+![Blog Page](https://cdn.cosmicjs.com/cbd90ee0-32db-11ed-8a37-f1952c73e588-astro-cms-screenshot-3.png)
+
+## Getting started
+
+### Environment Variables
+
+You'll need to create an .env file in the root of the project. Log in to Cosmic and from Bucket Settings > API Access take the following values:
 
 ```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+//.env
+PUBLIC_COSMIC_BUCKET_SLUG=your_cosmic_slug
+PUBLIC_COSMIC_READ_KEY=your_cosmic_read_key
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Install the dependencies with
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```
+pnpm install
+# or
+yarn install
+# or
+npm install
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+Then run the development server:
 
-## 🧞 Commands
+```
+pnpm run dev
+# or
+yarn dev
+# or
+npm run dev
+```
 
-All commands are run from the root of the project, from a terminal:
+Open [http://localhost:3000](http://localhost:3000/) with your browser to see the result.
 
-| Command                | Action                                             |
-| :--------------------- | :------------------------------------------------- |
-| `npm install`          | Installs dependencies                              |
-| `npm run dev`          | Starts local dev server at `localhost:3000`        |
-| `npm run build`        | Build your production site to `./dist/`            |
-| `npm run preview`      | Preview your build locally, before deploying       |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro preview` |
-| `npm run astro --help` | Get help using the Astro CLI                       |
+You can start editing the page by modifying `src/pages/index.astro`. The page auto-updates as you edit the file.
 
-## 👀 Want to learn more?
+## Deploy on Vercel
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+<p>Use the following button to deploy to <a href="https://vercel.com/" rel="noopener noreferrer" target="_blank">Vercel</a>. You will need to add API accesss keys as environment variables. Find these in <em>Bucket Settings &gt; API Access</em>.</p>
+<p>
+<a href="https://vercel.com/new/clone?env=PUBLIC_COSMIC_BUCKET_SLUG%2CPUBLIC_COSMIC_READ_KEY%2C&repository-url=https%3A%2F%2Fgithub.com%2Fcosmicjs%2Fsimple-astro-blog" rel="noopener noreferrer" target="_blank"><img src="https://cdn.cosmicjs.com/d3f0d5e0-c064-11ea-9a05-6f8a16b0b14c-deploy-to-vercel.svg" style="width: 100px;" class="fr-fic fr-dib fr-fil"></a>
+</p>
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+Your feedback and contributions are welcome!
