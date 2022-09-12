@@ -1,0 +1,75 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+import { getAllPosts } from "../../lib/cosmic";
+import { Image } from "@astrojs/image/components";
+import { getFeaturedPost } from "../../lib/cosmic";
+
+export interface Post {
+  title: string;
+  slug: string;
+  metadata: {
+    excerpt: string;
+    tags: {
+      title: string;
+    }[];
+  };
+}
+
+const data = await getAllPosts();
+const featuredPost = await getFeaturedPost();
+const tags = featuredPost.metadata.tags;
+---
+
+<Layout title="Blog">
+  <h1 class="text-4xl font-bold">Blog Posts</h1>
+  <div class="my-6"></div>
+  <section class="bg-white rounded-md">
+    <a
+      href={`blog/${featuredPost.slug}`}
+      class="hover:opacity-80 transition-opacity"
+    >
+      <Image
+        src={featuredPost.metadata.cover_image.imgix_url}
+        format="webp"
+        width={1200}
+        aspectRatio={16 / 9}
+        alt="Featured Blog Post"
+        class={"rounded-t-md"}
+        loading="eager"
+      />
+      <div
+        class="flex flex-col gap-y-2 bg-white h-fit p-6 rounded-b-md shadow-md"
+      >
+        <h2 class="text-3xl font-semibold">{featuredPost.title}</h2>
+        <p class="text-lg">{featuredPost.metadata.excerpt}</p>
+        {
+          tags && (
+            <div class="flex flex-wrap gap-1">
+              {tags?.map((tag: { title: string }) => (
+                <span class="bg-zinc-100 border px-2 text-sm text-zinc-700 font-bold rounded-md transition shadow w-fit whitespace-nowrap">
+                  {tag.title}
+                </span>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </a>
+  </section>
+  <div class="my-6"></div>
+  <ul class="grid md:grid-cols-2 gap-8">
+    {
+      data
+        .filter((post: Post) => post.title !== featuredPost.title)
+        .map((post: Post) => (
+          <Card
+            title={post.title}
+            href={post.slug}
+            body={post.metadata.excerpt}
+            tags={post.metadata.tags.map((tag) => tag.title)}
+          />
+        ))
+    }
+  </ul>
+</Layout>

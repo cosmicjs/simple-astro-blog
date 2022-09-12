@@ -1,0 +1,60 @@
+---
+import { getConfig } from "../lib/cosmic";
+const config = await getConfig();
+const defaultTitle = config.metadata.website_title;
+const defaultDescription = config.metadata.website_description;
+const defaultImage = config.metadata.og_image.imgix_url;
+const defaultUrl = config.metadata.og_url;
+const { title, description, imageUrl } = Astro.props;
+---
+
+<!-- HTML Meta Tags -->
+<title>{title || defaultTitle}</title>
+<meta name="description" content={description || defaultDescription} />
+
+<!-- Google / Search Engine Tags -->
+<meta itemprop="name" content={title || defaultTitle} />
+<meta itemprop="description" content={description || defaultDescription} />
+<meta itemprop="image" content={imageUrl || defaultImage} />
+
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content={defaultUrl} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title || defaultTitle} />
+<meta property="og:description" content={description || defaultDescription} />
+<meta property="og:image" content={imageUrl || defaultImage} />
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title || defaultTitle} />
+<meta name="twitter:description" content={description || defaultDescription} />
+<meta name="twitter:image" content={imageUrl || defaultImage} />
+
+<!-- Favicon Meta Tags -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="/favicon/apple-touch-icon.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="/favicon/favicon-32x32.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="16x16"
+  href="/favicon/favicon-16x16.png"
+/>
+<link rel="manifest" href="/favicon/site.webmanifest" />
+<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#000000" />
+<link rel="shortcut icon" href="/favicon/favicon.ico" />
+<meta name="msapplication-TileColor" content="#000000" />
+<meta name="msapplication-config" content="/favicon/browserconfig.xml" />
+<meta name="theme-color" content="#000" />
+<link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+<meta name="generator" content={Astro.generator} />

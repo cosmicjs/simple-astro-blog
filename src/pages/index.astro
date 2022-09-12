@@ -1,0 +1,79 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import { getAllPosts } from "../lib/cosmic";
+
+const data = await getAllPosts();
+
+export interface Post {
+  title: string;
+  slug: string;
+  metadata: {
+    excerpt: string;
+    tags: {
+      title: string;
+    }[];
+  };
+}
+---
+
+<Layout>
+  <h1 class="text-4xl font-bold">
+    Simple <span
+      class="bg-clip-text text-transparent bg-gradient-to-b from-[#4f39fa] to-[#da62c4]"
+      >Astro</span
+    > Blog
+  </h1>
+  <div class="my-6"></div>
+  <p class="text-2xl mb-4 font-bold">This Blog is built with:</p>
+  <section class="w-full flex flex-col lg:flex-row gap-8">
+    <a
+      href="https://www.cosmicjs.com/"
+      class="bg-[#1e1e1e] w-full p-6 rounded-md shadow-md hover:shadow-lg hover:opacity-80 transition"
+    >
+      <h3
+        class="text-2xl font-bold bg-gradient-to-l bg-clip-text text-transparent from-[#29ABE2] to-[#6CEEF6] w-fit"
+      >
+        Cosmic
+      </h3>
+      <p class="text-white">
+        A Headless Content Management System and API toolkit.
+      </p>
+    </a>
+    <a
+      href="https://astro.build/"
+      class="bg-[#1e1e1e] w-full p-6 rounded-md shadow-md hover:shadow-lg hover:opacity-80 transition"
+    >
+      <h3
+        class="text-2xl font-bold bg-gradient-to-b bg-clip-text text-transparent from-[#4f39fa] to-[#da62c4] w-fit"
+      >
+        Astro
+      </h3>
+      <p class="text-white">
+        A lightweight web framework for building content focused websites.
+      </p>
+    </a>
+  </section>
+  <div class="my-6"></div>
+  <h3 class="text-2xl font-bold mb-4">Blog Posts</h3>
+  <section>
+    <ul class="grid md:grid-cols-2 gap-8">
+      {
+        data.map((post: Post) => (
+          <Card
+            title={post.title}
+            href={post.slug}
+            body={post.metadata.excerpt}
+            tags={post.metadata.tags.map((tag) => tag.title)}
+          />
+        ))
+      }
+    </ul>
+  </section>
+  <div class="my-12"></div>
+  <a
+    href="/blog"
+    class="text-xl bg-gradient-to-l hover:bg-gradient-to-b from-[#29ABE2] to-[#6CEEF6] hover:from-[#4f39fa] hover:to-[#da62c4] text-white rounded-md px-8 py-3 shadow-md hover:shadow-xl transition self-center"
+    >Blog page</a
+  >
+</Layout>

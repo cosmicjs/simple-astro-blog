@@ -1,0 +1,84 @@
+---
+import { getAllPosts, getConfig } from "../../lib/cosmic";
+import Layout from "../../layouts/Layout.astro";
+import PostBody from "../../components/PostBody";
+import { Image } from "@astrojs/image/components";
+import { parseISO, format } from "date-fns";
+const config = await getConfig();
+const defaultAvatar = config.metadata.default_avatar.imgix_url;
+interface Post {
+  slug: string;
+  title: string;
+  created_at: string;
+  metadata: {
+    excerpt: string;
+    content: string;
+    cover_image: {
+      imgix_url: string;
+    };
+    author: {
+      title: string;
+      metadata: {
+        avatar: {
+          imgix_url: string;
+        };
+      };
+    };
+  };
+}
+
+export async function getStaticPaths() {
+  const data = (await getAllPosts()) || [];
+
+  return data.map((post: Post) => {
+    return {
+      params: { slug: post.slug },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+---
+
+<Layout
+  title={post.title}
+  description={post.metadata.excerpt}
+  imageUrl={post.metadata.cover_image.imgix_url}
+>
+  <article>
+    <section class="border-b pb-8">
+      <h1 class="text-4xl font-bold">{post.title}</h1>
+      <div class="my-8"></div>
+      <span class="flex items-center gap-x-4 font-semibold">
+        <Image
+          src={post.metadata.author.metadata?.avatar.imgix_url || defaultAvatar}
+          format="webp"
+          width={50}
+          height={50}
+          class="rounded-full shadow-md"
+          alt={post.metadata.author?.title || ""}
+          loading="eager"
+        />
+        <span class="flex flex-col">
+          {
+            post.metadata.author?.title && (
+              <span>{post.metadata.author?.title}</span>
+            )
+          }
+          <span>{format(parseISO(post.created_at), "MM/dd/yyyy")}</span>
+        </span>
+      </span>
+    </section>
+    <Image
+      src={post.metadata.cover_image.imgix_url}
+      format="webp"
+      width={1200}
+      aspectRatio={16 / 9}
+      quality={50}
+      alt=""
+      class={"rounded-md shadow-lg my-12"}
+    />
+    <PostBody content={post.metadata.content} />
+  </article>
+</Layout>

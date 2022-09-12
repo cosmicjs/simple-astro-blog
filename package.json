@@ -1,0 +1,27 @@
+{
+  "name": "@example/basics",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^1.1.5",
+    "cosmicjs": "^4.2.10",
+    "date-fns": "^2.29.2",
+    "react-markdown": "^8.0.3"
+  },
+  "devDependencies": {
+    "@astrojs/image": "^0.5.1",
+    "@astrojs/react": "^1.1.1",
+    "@astrojs/tailwind": "^1.0.0",
+    "@types/node": "^18.7.15",
+    "astro-robots-txt": "^0.3.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
