@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import PostBody from "../../components/PostBody";
 import { Image } from "@astrojs/image/components";
 import { parseISO, format } from "date-fns";
+import Author from "../../components/Author.astro";
 const config = await getConfig();
 const defaultAvatar = config.metadata.default_avatar.imgix_url;
 interface Post {
@@ -80,5 +81,17 @@ const { post } = Astro.props;
       class={"rounded-md shadow-lg my-12"}
     />
     <PostBody content={post.metadata.content} />
+    <section>
+      <Author
+        name={post.metadata.author.title || "the author"}
+        imageUrl={post.metadata.author.metadata?.avatar.imgix_url ||
+          defaultAvatar}
+        about={post.metadata.author.metadata?.about ||
+          "This author decided to remain anonymous. Whoever they are, I'm sure they love coffee. Everyone loves coffee..."}
+        linkedIn={post.metadata.author.metadata?.linkedin_link || ""}
+        twitter={post.metadata.author.metadata?.twitter_link || ""}
+        gitHub={post.metadata.author.metadata?.github_link || ""}
+      />
+    </section>
   </article>
 </Layout>
