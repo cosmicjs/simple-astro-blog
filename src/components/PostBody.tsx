@@ -27,6 +27,7 @@ const components: {} = {
         alt={img.alt}
         loading="lazy"
         decoding="async"
+        className="rounded-md shadow"
       />
     );
   },
