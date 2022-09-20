@@ -8,7 +8,7 @@ import image from "@astrojs/image";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), react(), image(), robotsTxt()],
-  site: "https://modern-astro-blog.vercel.app/",
+  site: "https://simple-astro-blog.vercel.app",
   experimental: {
     integrations: true,
   },
