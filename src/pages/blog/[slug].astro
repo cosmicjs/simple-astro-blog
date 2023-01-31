@@ -14,13 +14,15 @@ interface Post {
   metadata: {
     excerpt: string;
     content: string;
-    cover_image: {
+    cover_image?: {
+      url: string;
       imgix_url: string;
     };
-    author: {
+    author?: {
       title: string;
       metadata: {
         avatar: {
+          url: string;
           imgix_url: string;
         };
       };
@@ -45,7 +47,7 @@ const { post } = Astro.props;
 <Layout
   title={post.title}
   description={post.metadata.excerpt}
-  imageUrl={post.metadata.cover_image.imgix_url}
+  imageUrl={post.metadata.cover_image.imgix_url || defaultAvatar}
 >
   <article>
     <section class="border-b pb-8">
@@ -53,18 +55,20 @@ const { post } = Astro.props;
       <div class="my-8"></div>
       <span class="flex items-center gap-x-4 font-semibold">
         <Image
-          src={post.metadata.author.metadata?.avatar.imgix_url || defaultAvatar}
+          src={post.metadata.author.metadata.avatar.imgix_url || defaultAvatar}
           format="webp"
           width={50}
           height={50}
           class="rounded-full shadow-md"
-          alt={post.metadata.author?.title || ""}
+          alt={post.metadata.author.title || ""}
           loading="eager"
         />
         <span class="flex flex-col">
           {
-            post.metadata.author?.title && (
-              <span>{post.metadata.author?.title}</span>
+            post.metadata.author.title ? (
+              <span>{post.metadata.author.title}</span>
+            ) : (
+              ""
             )
           }
           <span>{format(parseISO(post.created_at), "MM/dd/yyyy")}</span>

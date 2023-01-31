@@ -12,7 +12,8 @@ export async function getAllPosts() {
       type: "posts",
     })
     .props("title,slug,metadata,created_at")
-    .sort("-created_at");
+    .sort("-created_at")
+    .depth(2);
   return data.objects;
 }
 
@@ -22,13 +23,15 @@ export async function getFeaturedPost() {
       type: "featured-post",
       slug: "set-featured-post",
     })
-    .props("metadata");
+    .props("metadata")
+    .depth(2);
   return data.objects[0].metadata.post;
 }
 
 export async function getConfig() {
   const data = await bucket.objects
     .find({ type: "config", slug: "config" })
-    .props("metadata");
+    .props("metadata")
+    .depth(1);
   return data.objects[0];
 }

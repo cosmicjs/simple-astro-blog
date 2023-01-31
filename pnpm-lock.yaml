@@ -7,7 +7,7 @@ specifiers:
   '@types/node': ^18.7.15
   astro: ^2.0.4
   astro-robots-txt: ^0.3.8
-  cosmicjs: ^4.3.1
+  cosmicjs: ^5.0.3
   date-fns: ^2.29.2
   react: ^18.2.0
   react-dom: ^18.2.0
@@ -15,7 +15,7 @@ specifiers:
 
 dependencies:
   astro: 2.0.4_@types+node@18.7.15
-  cosmicjs: 4.3.1
+  cosmicjs: 5.0.3
   date-fns: 2.29.2
   react-markdown: 8.0.3_3stiutgnnbnfnf3uowm5cip22i
 
@@ -1131,14 +1131,13 @@ packages:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
     engines: {node: '>= 0.6'}
 
-  /cosmicjs/4.3.1:
-    resolution: {integrity: sha512-l+6FvVW/SV5cUQ8EKIK1CpimfNKwo8/E5oIdIKseSorL+zxJ+HBsOGqUSk2+1K8bySc4bYGal2L4Q9SsdUrpoQ==}
-    engines: {node: '>=6.0'}
+  /cosmicjs/5.0.3:
+    resolution: {integrity: sha512-prfwMLhNsRPpAU7VRx8l4B/Z4xV5u8biuiqCfzlJlAxhucR26lZ5FSZRE/U+VFyX6BqF33IHd08F/sYOuMGy1A==}
+    engines: {node: '>=12'}
     dependencies:
       axios: 0.21.4
       form-data: 3.0.1
       regenerator-runtime: 0.13.9
-      typescript: 4.6.4
     transitivePeerDependencies:
       - debug
     dev: false
