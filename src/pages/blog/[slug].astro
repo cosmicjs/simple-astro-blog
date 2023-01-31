@@ -45,7 +45,7 @@ const { post } = Astro.props;
 ---
 
 <Layout
-  title={"cats"}
+  title={post.title}
   description={post.metadata.excerpt}
   imageUrl={post.metadata.cover_image.imgix_url || defaultAvatar}
 >
