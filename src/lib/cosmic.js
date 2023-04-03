@@ -21,19 +21,19 @@ export async function getAllPosts() {
 
 export async function getFeaturedPost() {
   const data = await cosmic.objects
-    .find({
+    .findOne({
       type: "featured-post",
       slug: "set-featured-post",
     })
     .props("metadata")
     .depth(2);
-  return data.objects[0].metadata.post;
+  return data.object.metadata.post;
 }
 
 export async function getConfig() {
   const data = await cosmic.objects
-    .find({ type: "config", slug: "config" })
+    .findOne({ type: "config", slug: "config" })
     .props("metadata")
     .depth(1);
-  return data.objects[0];
+  return data.object;
 }
