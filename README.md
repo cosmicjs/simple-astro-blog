@@ -57,7 +57,7 @@ You can start editing the page by modifying `src/pages/index.astro`. The page au
 
 <p>Use the following button to deploy to <a href="https://vercel.com/" rel="noopener noreferrer" target="_blank">Vercel</a>. You will need to add API accesss keys as environment variables. Find these in <em>Bucket Settings &gt; API Access</em>.</p>
 <p>
-<a href="https://vercel.com/new/clone?env=PUBLIC_COSMIC_BUCKET_SLUG%2CPUBLIC_COSMIC_READ_KEY%2C&repository-url=https%3A%2F%2Fgithub.com%2Fcosmicjs%2Fsimple-astro-blog" rel="noopener noreferrer" target="_blank"><img src="https://cdn.cosmicjs.com/d3f0d5e0-c064-11ea-9a05-6f8a16b0b14c-deploy-to-vercel.svg" style="width: 100px;" class="fr-fic fr-dib fr-fil"></a>
+<a href="https://vercel.com/new/clone?env=PUBLIC_COSMIC_BUCKET_SLUG,PUBLIC_COSMIC_READ_KEY&repository-url=https://github.com/cosmicjs/simple-astro-blog/tree/api-v3" rel="noopener noreferrer" target="_blank"><img src="https://cdn.cosmicjs.com/d3f0d5e0-c064-11ea-9a05-6f8a16b0b14c-deploy-to-vercel.svg" style="width: 100px;" class="fr-fic fr-dib fr-fil"></a>
 </p>
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
