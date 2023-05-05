@@ -10,7 +10,7 @@ const components: {} = {
       <a
         href={a.href}
         target="_blank"
-        className="text-blue-600 border-b border-b-transparent hover:border-b-zinc-300 transition-colors border-">
+        className="border- border-b border-b-transparent text-blue-600 transition-colors hover:border-b-zinc-300">
         {a.children}
       </a>
     )

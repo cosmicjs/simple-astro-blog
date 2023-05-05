@@ -28,10 +28,10 @@ const tags = featuredPost.metadata.tags
 <Layout title="Blog">
   <h1 class="text-4xl font-bold">Blog Posts</h1>
   <div class="my-6"></div>
-  <section class="bg-white rounded-md">
+  <section class="rounded-md bg-white">
     <a
       href={`blog/${featuredPost.slug}`}
-      class="hover:opacity-80 transition-opacity">
+      class="transition-opacity hover:opacity-80">
       {
         featuredPost.metadata.cover_image && (
           <Image
@@ -47,14 +47,14 @@ const tags = featuredPost.metadata.tags
         )
       }
       <div
-        class="flex flex-col gap-y-2 bg-white h-fit p-6 rounded-md shadow-md">
+        class="flex h-fit flex-col gap-y-2 rounded-md bg-white p-6 shadow-md">
         <h2 class="text-3xl font-semibold">{featuredPost.title}</h2>
         <p class="text-lg">{featuredPost.metadata.excerpt}</p>
         {
           tags && (
             <div class="flex flex-wrap gap-1">
               {tags?.map((tag: { title: string }) => (
-                <span class="bg-zinc-100 border px-2 text-sm text-zinc-700 font-bold rounded-md transition shadow w-fit whitespace-nowrap">
+                <span class="w-fit whitespace-nowrap rounded-md border bg-zinc-100 px-2 text-sm font-bold text-zinc-700 shadow transition">
                   {tag.title}
                 </span>
               ))}
@@ -65,7 +65,7 @@ const tags = featuredPost.metadata.tags
     </a>
   </section>
   <div class="my-6"></div>
-  <ul class="grid md:grid-cols-2 gap-8">
+  <ul class="grid gap-8 md:grid-cols-2">
     {
       data
         .filter((post: Props) => post.title !== featuredPost.title)
