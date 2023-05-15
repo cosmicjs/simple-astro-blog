@@ -12,6 +12,9 @@ interface Props {
     excerpt: string
     tags: {
       title: string
+      metadata: {
+        color?: string
+      }
     }[]
     cover_image?: {
       url: string
@@ -53,11 +56,15 @@ const tags = featuredPost.metadata.tags
         {
           tags && (
             <div class="flex flex-wrap gap-1">
-              {tags?.map((tag: { title: string }) => (
-                <span class="w-fit whitespace-nowrap rounded-md border bg-zinc-100 px-2 text-sm font-bold text-zinc-700 shadow transition">
-                  {tag.title}
-                </span>
-              ))}
+              {tags?.map(
+                (tag: { title: string; metadata: { color?: string } }) => (
+                  <span
+                    class="w-fit whitespace-nowrap rounded-md bg-black px-2 text-sm font-bold text-white shadow transition"
+                    style={`background-color: ${tag.metadata.color}`}>
+                    {tag.title}
+                  </span>
+                )
+              )}
             </div>
           )
         }
@@ -74,7 +81,7 @@ const tags = featuredPost.metadata.tags
             title={post.title}
             href={post.slug}
             body={post.metadata.excerpt}
-            tags={post.metadata.tags.map((tag) => tag.title)}
+            tags={post.metadata.tags.map((tag) => tag)}
           />
         ))
     }
