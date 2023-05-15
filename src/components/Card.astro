@@ -3,7 +3,12 @@ export interface Props {
   title: string
   body: string
   href: string
-  tags: string[]
+  tags: {
+    title: string
+    metadata: {
+      color?: string
+    }
+  }[]
 }
 
 const { href, title, body, tags } = Astro.props
@@ -21,11 +26,15 @@ const { href, title, body, tags } = Astro.props
       {
         tags && (
           <div class="flex flex-wrap gap-1">
-            {tags?.map((tag) => (
-              <span class="w-fit whitespace-nowrap rounded-md border bg-zinc-100 px-2 text-sm font-bold text-zinc-700 shadow transition">
-                {tag}
-              </span>
-            ))}
+            {tags?.map(
+              (tag: { title: string; metadata: { color?: string } }) => (
+                <span
+                  class="w-fit whitespace-nowrap rounded-md bg-zinc-100 px-2 text-sm font-bold text-white shadow transition"
+                  style={`background-color: ${tag.metadata?.color}`}>
+                  {tag.title}
+                </span>
+              )
+            )}
           </div>
         )
       }
