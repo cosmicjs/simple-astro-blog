@@ -29,7 +29,7 @@ const { href, title, body, tags } = Astro.props
             {tags?.map(
               (tag: { title: string; metadata: { color?: string } }) => (
                 <span
-                  class="w-fit whitespace-nowrap rounded-md bg-zinc-100 px-2 text-sm font-bold text-white shadow transition"
+                  class="w-fit whitespace-nowrap rounded-md bg-black px-2 text-sm font-bold text-white shadow transition"
                   style={`background-color: ${tag.metadata?.color}`}>
                   {tag.title}
                 </span>
