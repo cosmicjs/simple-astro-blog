@@ -1,97 +1,123 @@
 ---
-import { getAllPosts, getConfig } from "../../lib/cosmic";
-import Layout from "../../layouts/Layout.astro";
-import PostBody from "../../components/PostBody";
-import { Image } from "@astrojs/image/components";
-import { parseISO, format } from "date-fns";
-import Author from "../../components/Author.astro";
-const config = await getConfig();
-const defaultAvatar = config.metadata.default_avatar.imgix_url;
-interface Post {
-  slug: string;
-  title: string;
-  created_at: string;
-  metadata: {
-    excerpt: string;
-    content: string;
-    cover_image: {
-      imgix_url: string;
-    };
-    author: {
-      title: string;
-      metadata: {
-        avatar: {
-          imgix_url: string;
-        };
-      };
-    };
-  };
+import { getAllPosts, getConfig } from '../../lib/cosmic'
+import Layout from '../../layouts/Layout.astro'
+import PostBody from '../../components/PostBody'
+import { Image } from '@astrojs/image/components'
+import { parseISO, format } from 'date-fns'
+import Author from '../../components/Author.astro'
+const config = await getConfig()
+const defaultMetaImage = config.metadata.og_image.imgix_url
+
+interface Props {
+  slug: string
+  post: {
+    slug: string
+    title: string
+    created_at: string
+    metadata: {
+      excerpt: string
+      content: string
+      cover_image?: {
+        url: string
+        imgix_url: string
+      }
+      author?: {
+        title: string
+        slug: string
+        metadata: {
+          avatar?: {
+            url: string
+            imgix_url: string
+          }
+          about?: string
+          linkedin_link?: string
+          twitter_link?: string
+          github_link?: string
+        }
+      }
+    }
+  }
 }
 
 export async function getStaticPaths() {
-  const data = (await getAllPosts()) || [];
+  const data = (await getAllPosts()) || []
 
-  return data.map((post: Post) => {
+  return data.map((post: Props) => {
     return {
       params: { slug: post.slug },
-      props: { post },
-    };
-  });
+      props: { post }
+    }
+  })
 }
 
-const { post } = Astro.props;
+const { post } = Astro.props
 ---
 
 <Layout
   title={post.title}
   description={post.metadata.excerpt}
-  imageUrl={post.metadata.cover_image.imgix_url}
->
+  imageUrl={post.metadata.cover_image?.imgix_url || defaultMetaImage}>
   <article>
     <section class="border-b pb-8">
       <h1 class="text-4xl font-bold">{post.title}</h1>
       <div class="my-8"></div>
       <span class="flex items-center gap-x-4 font-semibold">
-        <Image
-          src={post.metadata.author.metadata?.avatar.imgix_url || defaultAvatar}
-          format="webp"
-          width={50}
-          height={50}
-          class="rounded-full shadow-md"
-          alt={post.metadata.author?.title || ""}
-          loading="eager"
-        />
+        {
+          post.metadata.author?.metadata.avatar && (
+            <Image
+              src={post.metadata.author.metadata.avatar.imgix_url}
+              format="webp"
+              width={50}
+              height={50}
+              class="rounded-full shadow-md"
+              alt={post.metadata.author?.title}
+              loading="eager"
+            />
+          )
+        }
         <span class="flex flex-col">
           {
-            post.metadata.author?.title && (
+            post.metadata.author?.title ? (
               <span>{post.metadata.author?.title}</span>
+            ) : (
+              ''
             )
           }
-          <span>{format(parseISO(post.created_at), "MM/dd/yyyy")}</span>
+          <span>{format(parseISO(post.created_at), 'MM/dd/yyyy')}</span>
         </span>
       </span>
     </section>
-    <Image
-      src={post.metadata.cover_image.imgix_url}
-      format="webp"
-      width={1200}
-      aspectRatio={16 / 9}
-      quality={50}
-      alt=""
-      class={"rounded-md shadow-lg my-12"}
-    />
+    {
+      post.metadata.cover_image && (
+        <Image
+          src={post.metadata.cover_image.imgix_url}
+          format="webp"
+          width={1200}
+          height={675}
+          aspectRatio={16 / 9}
+          quality={50}
+          alt={`Cover image for the blog ${post.title}`}
+          class={'my-12 rounded-md shadow-lg'}
+        />
+      )
+    }
     <PostBody content={post.metadata.content} />
-    <section>
-      <Author
-        name={post.metadata.author.title || "the author"}
-        imageUrl={post.metadata.author.metadata?.avatar.imgix_url ||
-          defaultAvatar}
-        about={post.metadata.author.metadata?.about ||
-          "This author decided to remain anonymous. Whoever they are, I'm sure they love coffee. Everyone loves coffee..."}
-        linkedIn={post.metadata.author.metadata?.linkedin_link || ""}
-        twitter={post.metadata.author.metadata?.twitter_link || ""}
-        gitHub={post.metadata.author.metadata?.github_link || ""}
-      />
-    </section>
+    {
+      post.metadata?.author && (
+        <section>
+          <Author
+            name={post.metadata.author.title || 'the author'}
+            imageUrl={post.metadata.author.metadata.avatar?.imgix_url || ''}
+            about={
+              post.metadata.author.metadata.about ||
+              "This author decided to remain anonymous. Whoever they are, I'm sure they love coffee. Everyone loves coffee..."
+            }
+            linkedIn={post.metadata.author?.metadata.linkedin_link || ''}
+            twitter={post.metadata.author?.metadata.twitter_link || ''}
+            gitHub={post.metadata.author?.metadata.github_link || ''}
+          />
+        </section>
+      )
+    }
   </article>
 </Layout>
