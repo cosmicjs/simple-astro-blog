@@ -8,7 +8,7 @@ To build this app, we’re going to use the following technologies:
 
 ### Links
 
-- [Install the App Template](https://www.cosmicjs.com/apps/simple-astro-blog)
+- [Install the template](https://www.cosmicjs.com/marketplace/templates/simple-astro-blog)
 - [View the live demo](https://simple-astro-blog.vercel.app/)
 
 ## Screenshots
