@@ -13,7 +13,4 @@ export default defineConfig({
     robotsTxt()
   ],
   site: 'https://simple-astro-blog.vercel.app',
-  experimental: {
-    integrations: true
-  }
 })
