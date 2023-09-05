@@ -71,11 +71,11 @@ const featuredPost = await getFeaturedPost()
             <Image
               src={post.metadata.author.metadata.avatar.imgix_url}
               format="webp"
+              quality={50}
               width={50}
               height={50}
               class="rounded-full shadow-md"
               alt={post.metadata.author?.title}
-              loading="eager"
             />
           )
         }
