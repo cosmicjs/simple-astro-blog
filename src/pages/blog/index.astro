@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro'
 import Card from '../../components/Card.astro'
 import { getAllPosts } from '../../lib/cosmic'
-import { Image } from '@astrojs/image/components'
+import { Image } from 'astro:assets'
 import { getFeaturedPost } from '../../lib/cosmic'
 
 interface Props {
@@ -24,7 +24,7 @@ interface Props {
 }
 
 const data = await getAllPosts()
-const featuredPost: Props = await getFeaturedPost()
+const featuredPost = await getFeaturedPost()
 const tags = featuredPost.metadata.tags
 ---
 
@@ -42,10 +42,10 @@ const tags = featuredPost.metadata.tags
             format="webp"
             width={1200}
             height={575}
-            aspectRatio={16 / 9}
             alt="Featured Blog Post"
             class={'rounded-t-md'}
             loading="eager"
+            transition:name="cover image"
           />
         )
       }

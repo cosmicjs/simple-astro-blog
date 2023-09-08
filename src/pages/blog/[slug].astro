@@ -2,11 +2,12 @@
 import { getAllPosts, getConfig } from '../../lib/cosmic'
 import Layout from '../../layouts/Layout.astro'
 import PostBody from '../../components/PostBody'
-import { Image } from '@astrojs/image/components'
+import { Image } from 'astro:assets'
 import { parseISO, format } from 'date-fns'
 import Author from '../../components/Author.astro'
 const config = await getConfig()
 const defaultMetaImage = config.metadata.og_image.imgix_url
+import { getFeaturedPost } from '../../lib/cosmic'
 
 interface Props {
   slug: string
@@ -51,6 +52,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props
+const featuredPost = await getFeaturedPost()
 ---
 
 <Layout
@@ -59,7 +61,9 @@ const { post } = Astro.props
   imageUrl={post.metadata.cover_image?.imgix_url || defaultMetaImage}>
   <article>
     <section class="border-b pb-8">
-      <h1 class="text-4xl font-bold">{post.title}</h1>
+      <h1 class="text-4xl font-bold">
+        {post.title}
+      </h1>
       <div class="my-8"></div>
       <span class="flex items-center gap-x-4 font-semibold">
         {
@@ -67,11 +71,11 @@ const { post } = Astro.props
             <Image
               src={post.metadata.author.metadata.avatar.imgix_url}
               format="webp"
+              quality={50}
               width={50}
               height={50}
               class="rounded-full shadow-md"
               alt={post.metadata.author?.title}
-              loading="eager"
             />
           )
         }
@@ -94,10 +98,13 @@ const { post } = Astro.props
           format="webp"
           width={1200}
           height={675}
-          aspectRatio={16 / 9}
           quality={50}
           alt={`Cover image for the blog ${post.title}`}
           class={'my-12 rounded-md shadow-lg'}
+          transition:name={
+            post.title === featuredPost.title ? 'cover image' : 'void'
+          }
+          transition:persist
         />
       )
     }
