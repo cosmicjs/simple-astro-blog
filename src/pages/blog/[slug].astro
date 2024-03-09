@@ -69,7 +69,7 @@ const featuredPost = await getFeaturedPost()
         {
           post.metadata.author?.metadata.avatar && (
             <Image
-              src={post.metadata.author.metadata.avatar.imgix_url}
+              src={`${post.metadata.author.metadata.avatar.imgix_url}?w=200&h=200&fit=crop&auto=compression,format`}
               format="webp"
               quality={50}
               width={50}
