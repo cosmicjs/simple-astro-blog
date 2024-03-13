@@ -58,7 +58,8 @@ const featuredPost = await getFeaturedPost()
 <Layout
   title={post.title}
   description={post.metadata.excerpt}
-  imageUrl={post.metadata.cover_image?.imgix_url || defaultMetaImage}>
+  imageUrl={`${post.metadata.cover_image?.imgix_url}?w=1200&auto=format,compression` ||
+    defaultMetaImage}>
   <article>
     <section class="border-b pb-8">
       <h1 class="text-4xl font-bold">
@@ -94,7 +95,7 @@ const featuredPost = await getFeaturedPost()
     {
       post.metadata.cover_image && (
         <Image
-          src={post.metadata.cover_image.imgix_url}
+          src={`${post.metadata.cover_image?.imgix_url}?w=1200&auto=format,compression`}
           format="webp"
           width={1200}
           height={675}
@@ -114,7 +115,10 @@ const featuredPost = await getFeaturedPost()
         <section>
           <Author
             name={post.metadata.author.title || 'the author'}
-            imageUrl={post.metadata.author.metadata.avatar?.imgix_url || ''}
+            imageUrl={
+              `${post.metadata.author.metadata.avatar?.imgix_url}?w=200&h=200&fit=crop&auto=compression,format` ||
+              ''
+            }
             about={
               post.metadata.author.metadata.about ||
               "This author decided to remain anonymous. Whoever they are, I'm sure they love coffee. Everyone loves coffee..."

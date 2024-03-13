@@ -24,7 +24,7 @@ const components: {} = {
   img: (img: { src: string; alt: string }) => {
     return (
       <img
-        src={`${img.src}?w=1200&auto=format&auto=compress`}
+        src={`${img.src}?w=1200&auto=format,compression`}
         alt={img.alt}
         loading="lazy"
         decoding="async"
