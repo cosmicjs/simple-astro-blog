@@ -3,14 +3,13 @@ import { Image } from 'astro:assets'
 const { name, imageUrl, about, linkedIn, twitter, gitHub } = Astro.props
 ---
 
-<div
-  class="my-4 flex items-center gap-x-8 rounded-md bg-white px-8 py-2 shadow">
+<div class="my-4 flex items-center gap-x-8 rounded-md bg-white p-8 shadow">
   <Image
     src={imageUrl}
-    width={200}
-    height={200}
+    width={100}
+    height={100}
     alt={name || 'The author'}
-    class={'rounded-full my-12'}
+    class={'rounded-full'}
     loading="lazy"
   />
   <div class="flex flex-col gap-y-4">

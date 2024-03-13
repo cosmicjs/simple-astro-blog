@@ -38,7 +38,7 @@ const tags = featuredPost.metadata.tags
       {
         featuredPost.metadata.cover_image && (
           <Image
-            src={featuredPost.metadata.cover_image.imgix_url}
+            src={`${featuredPost.metadata.cover_image.imgix_url}?w=1200&auto=format,compression`}
             format="webp"
             width={1200}
             height={575}
